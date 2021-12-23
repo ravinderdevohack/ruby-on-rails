@@ -1,0 +1,18 @@
+<h1>User Details</h1>
+<%= form_for :Post do |i| %>
+
+  <p>
+    <%= i.label :FirstName %>
+    <%= i.text_field :text %>
+  </p>
+
+  <p>
+    <%= i.label :LastName %>
+    <%= i.text_field :text %>
+  </p>
+
+  <p>
+    <%= i.submit :submit %>
+  </p>
+
+<% end %>
