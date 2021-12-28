@@ -70,3 +70,8 @@ group :test do
   gem "selenium-webdriver"
   gem "webdrivers"
 end
+
+gem "require_all"
+gem "rake"
+gem "sinatra-activerecord"
+gem "awesome_print"

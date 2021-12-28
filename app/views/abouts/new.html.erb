@@ -1,5 +1,5 @@
 <h1>User Details</h1>
-<%= form_for :Post do |i| %>
+<%= form_for :post, url: "/abouts" do |i| %>
 
   <p>
     <%= i.label :FirstName %>
@@ -8,11 +8,11 @@
 
   <p>
     <%= i.label :LastName %>
-    <%= i.text_field :text %>
+    <%= i.text_area :text %>
   </p>
 
   <p>
-    <%= i.submit :submit %>
+    <%= i.submit %>
   </p>
 
 <% end %>
