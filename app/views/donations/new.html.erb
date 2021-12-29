@@ -1,0 +1,17 @@
+<h1>Donations Form</h1>
+<%= form_with model:@donation do |f| %>
+  
+  <%= f.label :user_id %>
+  <%= f.text_field :user %>  
+  
+  <%= f.label :organization_id %>
+  <%= f.text_field :organization %>  
+
+  <%= f.label :amount %>
+  <%= f.number_field :amount %>
+
+  <%= f.label :date %>
+  <%= f.datetime_field :date %>
+  
+  <%= f.submit %>
+<% end %>

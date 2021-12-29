@@ -75,3 +75,7 @@ gem "require_all"
 gem "rake"
 gem "sinatra-activerecord"
 gem "awesome_print"
+# gem "byebug"
+
+
+gem "byebug", "~> 11.1", :groups => [:development, :test]
