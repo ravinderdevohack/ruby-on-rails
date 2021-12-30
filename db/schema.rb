@@ -10,16 +10,42 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_29_060547) do
+ActiveRecord::Schema.define(version: 2021_12_30_102129) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "appointments", force: :cascade do |t|
+  create_table "accounts", force: :cascade do |t|
     t.string "name"
-    t.string "phone"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "supplier_id"
+    t.index ["supplier_id"], name: "index_accounts_on_supplier_id", unique: true
+  end
+
+  create_table "appointments", force: :cascade do |t|
+    t.datetime "appointment_date", precision: 6
+    t.bigint "doctor_id"
+    t.bigint "pateint_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["doctor_id"], name: "index_appointments_on_doctor_id"
+    t.index ["pateint_id"], name: "index_appointments_on_pateint_id"
+  end
+
+  create_table "assemblies", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "assemblies_parts", id: false, force: :cascade do |t|
+    t.bigint "part_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "assembly_id"
+    t.index ["assembly_id"], name: "index_assemblies_parts_on_assembly_id"
+    t.index ["part_id"], name: "index_assemblies_parts_on_part_id"
   end
 
   create_table "authors", force: :cascade do |t|
@@ -28,17 +54,16 @@ ActiveRecord::Schema.define(version: 2021_12_29_060547) do
     t.string "name"
   end
 
-  create_table "books", id: false, force: :cascade do |t|
+  create_table "books", force: :cascade do |t|
+    t.string "name"
+    t.bigint "author_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "author_id"
-    t.integer "name"
+    t.index ["author_id"], name: "index_books_on_author_id"
   end
 
   create_table "doctors", force: :cascade do |t|
     t.string "name"
-    t.string "phone"
-    t.string "specialist"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -52,6 +77,12 @@ ActiveRecord::Schema.define(version: 2021_12_29_060547) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "emoployees", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "names", force: :cascade do |t|
     t.string "age"
     t.datetime "created_at", precision: 6, null: false
@@ -61,6 +92,39 @@ ActiveRecord::Schema.define(version: 2021_12_29_060547) do
     t.index ["fullname"], name: "index_names_on_fullname"
   end
 
+  create_table "parts", force: :cascade do |t|
+    t.string "part_number"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "patients", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "pictures", force: :cascade do |t|
+    t.string "name"
+    t.string "imageable_type"
+    t.bigint "imageable_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["imageable_type", "imageable_id"], name: "index_pictures_on_imageable"
+  end
+
+  create_table "products", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "suppliers", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "age"
@@ -68,4 +132,5 @@ ActiveRecord::Schema.define(version: 2021_12_29_060547) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  add_foreign_key "books", "authors"
 end
