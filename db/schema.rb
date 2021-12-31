@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_12_30_114414) do
+ActiveRecord::Schema.define(version: 2021_12_30_164327) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -70,6 +70,18 @@ ActiveRecord::Schema.define(version: 2021_12_30_114414) do
     t.index ["author_id"], name: "index_books_on_author_id"
   end
 
+  create_table "customers", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "distributors", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "doctors", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
@@ -100,6 +112,37 @@ ActiveRecord::Schema.define(version: 2021_12_30_114414) do
     t.index ["fullname"], name: "index_names_on_fullname"
   end
 
+  create_table "novels", force: :cascade do |t|
+    t.string "title"
+    t.integer "published_year"
+    t.decimal "price"
+    t.boolean "out_of_print"
+    t.bigint "writer_id"
+    t.bigint "distributor_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["distributor_id"], name: "index_novels_on_distributor_id"
+    t.index ["writer_id"], name: "index_novels_on_writer_id"
+  end
+
+  create_table "novels_orders", force: :cascade do |t|
+    t.bigint "order_id"
+    t.bigint "novel_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["novel_id"], name: "index_novels_orders_on_novel_id"
+    t.index ["order_id"], name: "index_novels_orders_on_order_id"
+  end
+
+  create_table "orders", force: :cascade do |t|
+    t.date "order_date"
+    t.integer "status"
+    t.bigint "customer_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["customer_id"], name: "index_orders_on_customer_id"
+  end
+
   create_table "parts", force: :cascade do |t|
     t.string "part_number"
     t.datetime "created_at", precision: 6, null: false
@@ -127,6 +170,17 @@ ActiveRecord::Schema.define(version: 2021_12_30_114414) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "reviews", force: :cascade do |t|
+    t.text "body"
+    t.string "rating"
+    t.bigint "customer_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.bigint "novel_id"
+    t.index ["customer_id"], name: "index_reviews_on_customer_id"
+    t.index ["novel_id"], name: "index_reviews_on_novel_id"
+  end
+
   create_table "suppliers", force: :cascade do |t|
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
@@ -136,6 +190,12 @@ ActiveRecord::Schema.define(version: 2021_12_30_114414) do
   create_table "users", force: :cascade do |t|
     t.string "name"
     t.string "age"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "writers", force: :cascade do |t|
+    t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
