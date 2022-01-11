@@ -1,0 +1,45 @@
+<h1 class="text-center">UserDetails</h1>
+<table>
+  <tr>
+    <th class="border-2">ID</th>
+    <th class="border-2">User</th>
+    <th class="border-2">First Name</th>
+    <th class="border-2">Last Name</th>
+    <th class="border-2">Bio</th>
+    <th class="border-2">Address</th>
+    <th class="border-2">Email</th>
+    <th class="border-2">Alter Email</th>
+    <th class="border-2">Phone</th>
+    <th class="border-2">Alter Phone</th>
+    <th class="border-2">Aadhar Number</th>
+    <th class="border-2">Pan Number</th>
+    <th class="border-2" colspan="3"></th>
+
+    <th></th>
+  </tr>
+
+  <% @users.each do |user| %>
+    <tr>
+      <td class="border-1"><%=user.id %></td>
+      <td class="border-1"><%=user.user_type %></td>
+      <td class="border-1"><%=user.first_name %></td>
+      <td class="border-1"><%=user.last_name %></td>
+      <td class="border-1"><%=user.bio %></td>
+      <td class="border-1"><%=user.address %></td>
+      <td class="border-1"><%=user.email %></td>
+      <td class="border-1"><%=user.alter_email %></td>
+      <td class="border-1"><%=user.phone %></td>
+      <td class="border-1"><%=user.alter_phone %></td>
+      <td class="border-1"><%=user.aadhar_no %></td>
+      <td class="border-1"><%=user.pan_no %></td>
+      <td class="border-1"><%=button_to "Show", user_detail_path(user), method: :get %></td>
+      <td class="border-1"><%=button_to "Edit", edit_user_detail_path(user), method: :get %></td>
+      <td class="border-1"><%=button_to "Delete", user_detail_path(user), method: :delete  %></td>
+
+    </tr>
+  <% end %>
+  <tr></tr>
+</table>
+
+<button><%= link_to 'Create New User', 'user_details/new' %></button>
+

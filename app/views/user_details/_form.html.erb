@@ -1,0 +1,33 @@
+<%= form_with model: @user, url: user_details_new_path do |form| %>
+  <%= form.label :user, 'User :' %>
+  <%= form.radio_button :user_type, 'admin' %>
+  <%= form.label :user_type_admin, 'Admin' %>
+  <%= form.radio_button :user_type, 'customer' %>
+  <%= form.label :user_type_customer, 'Customer' %><br>
+
+  <%= form.label :first_name, 'First Name' %><br>
+  <%= form.text_field :first_name , class:'input'%><br>
+  <%= form.label :last_name, 'Last Name' %><br>
+  <%= form.text_field :last_name, class:'input'%><br>
+  <%= form.label :phone, 'Phone Number' %><br>
+  <%= form.telephone_field :phone, class:'input'%>  <br>
+  <%= form.label :alter_phone, 'Alter Phone' %><br>
+  <%= form.telephone_field :alter_phone , class:'input'%><br>
+  <%= form.label :address, 'Address' %><br>
+  <%= form.text_field :address , class:'input'%><br>
+  <%= form.label :email, 'email' %><br>
+  <%= form.email_field :email, class:'input' %><br>
+  <%= form.label :alter_email, 'Alternate email' %><br>
+  <%= form.email_field :alter_email, class:'input' %><br>
+  <%= form.label :aadhar_no, 'Aadhar Number ' %><br>
+  <%= form.text_field :aadhar_no, class:'input'%><br>  
+  <%= form.label :pan_no, 'Pan Number' %><br>
+  <%= form.text_field :pan_no, class:'input'%><br>
+  <%= form.label :bio, 'About Yourself' %><br>
+  <%= form.text_area :bio %><br> 
+  <%= form.label :password, 'Password' %><br>
+  <%= form.password_field :password , class:'input'%><br>
+
+  <button id="submit-btn">Submit</button>
+
+<% end %>

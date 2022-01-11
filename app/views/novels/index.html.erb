@@ -1,0 +1,23 @@
+<h1>Novels</h1>
+
+<table>
+  <tr>
+    <th> ID </th>
+    <th> Title </th>
+    <th> Price </th>
+    <th> Published Year </th>
+    <th> Available </th>
+    <th> Writer </th>
+  </tr>
+
+  <% @novels.each do |novel| %>
+    <tr>
+      <td><%= novel.id %></td>
+      <td><%= novel.title %></td>
+      <td><%= novel.price %></td>
+      <td><%= novel.published_year %></td>
+      <td><%= novel.out_of_print %></td>
+    </tr>
+  <% end %>
+  
+</table>
