@@ -79,3 +79,7 @@ gem "awesome_print"
 
 
 gem "byebug", "~> 11.1", :groups => [:development, :test]
+gem "dotenv-rails", groups: [:development, :test]
+gem "letter_opener", group: :development
+
+gem 'active_model_serializers'

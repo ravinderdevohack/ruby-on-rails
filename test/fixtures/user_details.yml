@@ -1,18 +1,8 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  first_name: MyString
-  last_name: MyString
-  bio: MyString
-  address: MyString
-  password: MyString
-  email: MyString
-  alter_email: MyString
-  phone: MyString
-  alter_phone: MyString
-  aadahar_no: MyString
-  pan_no: MyString
-  user_type: 1
+  name: "sachin"
+  phone: '1236547890'
 
 two:
   first_name: MyString

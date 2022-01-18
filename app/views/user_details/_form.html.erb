@@ -1,4 +1,5 @@
-<%= form_with model: @user, url: user_details_new_path do |form| %>
+<!-- <div id = "myForm"> -->
+<%= form_with  model: @user, url: @action == 'edit' ? user_detail_path : user_details_new_path, method: @action == 'edit' ? :patch : :post, id: 'myForm' do |form| %>
   <%= form.label :user, 'User :' %>
   <%= form.radio_button :user_type, 'admin' %>
   <%= form.label :user_type_admin, 'Admin' %>
@@ -28,6 +29,64 @@
   <%= form.label :password, 'Password' %><br>
   <%= form.password_field :password , class:'input'%><br>
 
+  <!-- <input type="button" value="Submit" id="submit-btn"></input> -->
   <button id="submit-btn">Submit</button>
 
 <% end %>
+<!-- </div> -->
+<script>
+
+  var regName = /^[A-Za-z]{3,}$/
+  var regEmail = /^\w[\w+.\-_]+@[A-z]+\.[A-z]+$/
+  var regPhone = /^[0-9]{10}$/
+  var regAddress = /^[\w+\d+\s..,-]{20,}$/
+  var regPassword = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{6,}$/
+  var regPan = /^[A-Z]{5}[0-9]{4}[A-Z]{1}$/ 
+  var regAadhar = /^[0-9]{12}$/
+
+
+  var inputArray = document.querySelectorAll(".input");
+  console.log(inputArray);
+  var regArray = new Array(regName, regName, regPhone, regPhone, regAddress, regEmail, regEmail, regAadhar, regPan, regPassword );
+  var alertArray = ["name must be greater than 3 characters ", "name must be greater than 3 characters", "enter valid phone number", "enter valid alter phone number",  "enter valid Address", "enter valid email address", "enter valid aadhar number", "enter valid alter aadhar number", "enter valid Pan number", "password must be greater than 8 character, conatin one special symbol and one number and one capital letter" ];
+  var array = [];
+
+
+  var submit = document.querySelector("#submit-btn");
+  submit.addEventListener("click", check);
+
+  function check(e) {
+    // document.querySelectorAll(".input").forEach( item => {array.push(item.value)});
+
+    validaion_fails = false;
+    for (var i = 0; i < inputArray.length; i++) {
+      array.push(inputArray[i].value)
+      console.log(array)
+      if ( !regArray[i].test(array[i]) &&  array[i] != "") {
+        alert(alertArray[i]);
+        array.length = 0;
+        console.log(array[i]);
+        console.log(alertArray[i]);
+        validaion_fails = true
+        break;
+      }
+    }
+
+    if (array.includes('')) {
+        alert("Please fill the Form");
+        validaion_fails = true;
+        array.length = 0;
+        console.log(array);
+    }
+
+    // if (validaion_fails) {
+    //   e.preventDefault();
+    // }else {
+    //   document.getElementById("myForm").submit();
+    // }
+    
+    console.log('validation checked')
+  }
+
+</script>
+
